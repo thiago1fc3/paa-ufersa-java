@@ -7,13 +7,24 @@ public class Merge {
         int A[] = {1, 2, 3, 4, -1, 5, 10};
 
         var algorithm = new Merge();
-        algorithm.execute(A, 0, 3, 6);
+        algorithm.mergeSort(A, 0, 6);
 
         System.out.println(Arrays.toString(A));
 
     }
 
-    void execute(int A[], int p, int q, int r) {
+    // O(n * log n)
+    void mergeSort(int[] A, int p, int r) {
+        if (p < r) {
+            var q = (p + r) / 2;
+            mergeSort(A, p, q);
+            mergeSort(A, q + 1, r);
+            this.merge(A, p, q, r);
+        }
+    }
+
+    // O(n)
+    void merge(int A[], int p, int q, int r) {
 
         var n1 = q - p + 1; // c1
         var n2 = r - q; // c2
